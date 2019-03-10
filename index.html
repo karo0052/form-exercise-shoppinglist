@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Shopping List</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+
+h1 {
+  text-align: center;
+}
+      fieldset {
+        display: block;
+        margin-inline-start: 2px;
+        margin-inline-end: 2px;
+        padding-block-start: 0.35em;
+        padding-inline-start: 0.75em;
+        padding-inline-end: 0.75em;
+        padding-block-end: 0.625em;
+        min-inline-size: min-content;
+        border-width: 2px;
+        border-style: groove;
+        border-color: threedface;
+        border-image: initial;
+      }
+
+      article {
+        width: 90vw;
+        margin: 0 auto;
+        background-color: whitesmoke;
+        padding: 10px;
+        border-bottom: 1px solid grey;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .dest_rema {
+        background-color: #0d4190;
+        box-sizing: border-box;
+        padding: 10px 0 20px 0;
+      }
+
+      .dest_netto {
+        background-color: #fad85b;
+        box-sizing: border-box;
+        padding:10px 0 20px 0;
+      }
+      .dest_superb {
+        background-color: #C11313;
+        box-sizing: border-box;
+        padding: 10px 0 20px 0;
+      }
+
+      header {
+        position: fixed;
+        height: 60px;
+        background-color: white;
+        width: 100vw;
+      }
+
+      h1,
+      #destination h2 {
+        padding: 10px 0 10px 20px;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 40vw 42vw 8vw;
+        grid-template-rows:
+          60px
+          70px 100px;
+        padding: 0 5vw 5vw 5vw;
+        width: 90vw;
+        box-sizing: border-box;
+        display: none;
+      }
+
+      label {
+        color: lightgrey;
+        font-size: 0.9em;
+      }
+
+      form h2 {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 2;
+      }
+
+      input {
+        outline: 0;
+        border: 0;
+        border-style: none;
+        border-bottom: 1px solid lightgrey;
+        font-size: 1.5em;
+        padding: 5px;
+        margin-bottom: 5px;
+      }
+
+      input:focus {
+        border-bottom: 2px solid black;
+      }
+h2 {
+  color: white;
+}
+      .dest_netto h2 {
+        color: black;
+      }
+      
+      .fill {
+        width: 100vw;
+        height: 60px;
+      }
+
+      .vare {
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        width: 60vw;
+      }
+      .antal {
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 3;
+        grid-column-end: 4;
+        justify-self: end;
+      }
+
+      input[name="quantity"],
+      input[name="offer"] {
+        width: 8vw;
+        border: 1px solid lightgrey;
+        border-radius: 5px;
+      }
+      input[name="quantity"]:focus,
+      input[name="offer"]:focus {
+        border: 1px solid black;
+      }
+
+      input[name="offerdate"] {
+        color: lightgrey;
+      }
+
+      input[name="offerdate"]:focus {
+        color: black;
+      }
+
+      .tilbud {
+        grid-row-start: 3;
+        grid-row-end: 4;
+        grid-column-start: 3;
+        grid-column-end: 4;
+        justify-self: end;
+      }
+
+      .tilbudstart {
+        grid-row-start: 3;
+        grid-row-end: 4;
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+
+      .butik {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        /* justify-self: end; */
+      }
+      select {
+        font-size: 1em;
+        border: 1px solid lightgrey;
+        padding: 5px;
+        background-color: lightgrey;
+        /* color: white; */
+        margin-bottom: 5px;
+      }
+
+      .add_button {
+        width: 90vw;
+        background-color: seagreen;
+        color: white;
+border-radius: 5px;
+      }
+
+      .show {
+        position: fixed;
+        transform: translateX(90vw) translateY(-10vw);
+      }
+
+      .show_add {
+        display: grid;
+      }
+
+.show_header {
+  height: 340px;
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Indkøbsliste</h1><p class="show">X</p>
+      <form>
+        <!-- <h2>Tilføj ny vare</h2> -->
+        <label class="butik">
+          <select name="supermarket">
+            <option value="Rema1000">Rema1000</option>
+            <option value="Netto">Netto</option>
+            <option value="SuperBrugsen">Super Brugsen</option> </select
+          ><br />Vælg butik</span>
+        </label>
+        <label class="vare"
+          ><input type="text" name="item_t" autofocus required /><br /><span
+            >Vare</span
+          >
+        </label>
+        <label class="antal">
+          <input type="number" name="quantity" value="1" required /> stk.
+        </label>
+
+        <label class="tilbud"> <input type="number" name="offer" />kr. </label>
+        <label class="tilbudstart">
+          <input type="date" name="offerdate" /> <br />Tilbudsdato
+        </label>
+
+        <input class="add_button" type="submit" value="Tilføj ny vare" name="submit" />
+      </form>
+    </header>
+    <div class="fill"></div>
+    <div id="destination">
+      <div class="dest_rema">
+        <h2>Rema 1000</h2>
+      </div>
+
+      <div class="dest_netto">
+        <h2>Netto</h2>
+      </div>
+
+      <div class="dest_superb">
+        <h2>Super Brugsen</h2>
+      </div>
+    </div>
+    <template>
+      <article>
+        <p class="data-quantity"></p>
+        <p class="data-item"></p>
+        <p class="data-date"></p>
+        <p class="data-offer"></p>
+        <input class="checkbox" type="checkbox" />
+      </article>
+    </template>
+
+    <script>
+      "use strict";
+      const form = document.querySelector("form");
+
+      const deletedObjects = [];
+      document.addEventListener("DOMContentLoaded", init);
+
+      function init() {
+        console.log("init");
+
+        getData();
+      }
+
+      function getData() {
+        console.log("getData");
+
+        fetch("https://friends-a7f9.restdb.io/rest/shopping-list", {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "x-apikey": "5c7ceca0cac6621685acbada",
+            "cache-control": "no-cache"
+          }
+        })
+          // istedet for at kalde en funktion, der så for each kalder en anden, så kan man bruge for each med det samme:
+          .then(res => res.json())
+          .then(data => {
+            console.table(data);
+            data.forEach(displayList);
+          });
+      }
+
+      function displayList(thing) {
+        console.log("displayList");
+
+        const clone = document.querySelector("template").cloneNode(true)
+          .content;
+
+        clone.querySelector(".data-quantity").textContent = thing.quantity;
+        clone.querySelector(".data-item").textContent = thing.item;
+
+        if (thing.date === undefined || thing.date === null || thing.date === ""){
+          clone.querySelector(".data-date").textContent = "";
+        } else {
+          let newDate = new Date(thing.date);
+          let getDate = newDate.getDate();
+          let getMonth = newDate.getMonth() + 1;
+          let getYear = newDate
+            .getFullYear()
+            .toString()
+            .substring(2);
+
+          clone.querySelector(
+            ".data-date"
+          ).textContent = `${getDate}/${getMonth}/${getYear}`;
+        }
+
+        clone.querySelector("article").dataset.id = thing._id;
+        clone.querySelector(".checkbox").addEventListener("click", e => {
+          if (e.target.checked == true) {
+            console.log("den er krydset af");
+            e.target.parentElement.remove();
+
+            deleteObj(thing._id);
+          }
+        });
+        if (thing.offer != "") {
+          clone.querySelector(".data-offer").textContent = thing.offer + "kr.";
+        }
+
+        if (thing.supermarket === "Rema1000") {
+          document.querySelector(".dest_rema").appendChild(clone);
+        } else if (thing.supermarket === "Netto") {
+          document.querySelector(".dest_netto").appendChild(clone);
+        } else if (thing.supermarket === "SuperBrugsen") {
+          document.querySelector(".dest_superb").appendChild(clone);
+        }
+      }
+
+      function post(newItem) {
+        console.log("post");
+
+        const postData = JSON.stringify(newItem);
+        fetch("https://friends-a7f9.restdb.io/rest/shopping-list", {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "x-apikey": "5c7ceca0cac6621685acbada",
+            "cache-control": "no-cache"
+          },
+          body: postData
+        })
+          /* ved direkte at kalde displayfriend af det nye objekt, der er tilføjet, opdateres arrayet bare
+        - altså indlæser den ikke hele arrayet igen. Derfor bliver det overflødigt at "nulstille" destinationen
+        og kalde get igen */
+          .then(res => res.json())
+          .then(data => {
+            form.elements.submit.disabled = false;
+
+            // document
+            //   .querySelector(".message")
+            //   .classList.add("message_animation");
+
+            form.reset();
+            //HER
+            form.elements.supermarket.value = newItem.supermarket;
+
+            // document
+            //   .querySelector(".message")
+            //   .addEventListener("animationend", () => {
+            //     document
+            //       .querySelector(".message")
+            //       .classList.remove("message_animation");
+            //   });
+
+            displayList(data);
+          });
+      }
+
+      function deleteObj(id) {
+        console.log("deleteObj");
+
+        fetch("https://friends-a7f9.restdb.io/rest/shopping-list/" + id, {
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "x-apikey": "5c7ceca0cac6621685acbada",
+            "cache-control": "no-cache"
+          }
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            deletedObjects.push(data);
+            console.log(deletedObjects);
+          });
+      }
+
+      form.addEventListener("submit", e => {
+        console.log("submitted");
+        e.preventDefault();
+        form.elements.submit.disabled = true;
+
+        const payload = {
+          supermarket: form.elements.supermarket.value,
+          item: form.elements.item_t.value,
+          quantity: form.elements.quantity.value,
+          offer: form.elements.offer.value,
+          date: form.elements.offerdate.value
+        };
+        console.log(payload);
+        post(payload);
+      });
+
+      document.querySelector(".show").addEventListener("click", () => {
+        console.log("der er klikket");
+        document.querySelector("form").classList.toggle("show_add");
+        document.querySelector("header").classList.toggle("show_header");
+      })
+    </script>
+  </body>
+</html>
