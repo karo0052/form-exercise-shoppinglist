@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Shopping List</title>
-
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <style>
       * {
         margin: 0;
         padding: 0;
       }
-
+body {
+  font-family:Arial, Helvetica, sans-serif;
+}
 
 h1 {
-  text-align: center;
+  font-family: 'Indie Flower', cursive;
+  font-size: 2.5em;
 }
       fieldset {
         display: block;
@@ -39,6 +42,11 @@ h1 {
         border-bottom: 1px solid grey;
         border-radius: 5px;
         box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 5vw 47vw 14vw 10vw 5vw;
+        grid-template-rows:
+          auto;
+          grid-gap: 5px;
       }
 
       .dest_rema {
@@ -60,9 +68,10 @@ h1 {
 
       header {
         position: fixed;
-        height: 60px;
+        height: 70px;
         background-color: white;
         width: 100vw;
+        border-bottom: 1px solid grey;
       }
 
       h1,
@@ -116,7 +125,7 @@ h2 {
       
       .fill {
         width: 100vw;
-        height: 60px;
+        height: 70px;
       }
 
       .vare {
@@ -189,11 +198,20 @@ h2 {
         background-color: seagreen;
         color: white;
 border-radius: 5px;
+font-family: 'Indie Flower', cursive;
       }
 
       .show {
         position: fixed;
-        transform: translateX(90vw) translateY(-10vw);
+        font-weight: 700;
+        font-size: 3em;
+        transform: translateX(87vw) translateY(-20vw);
+        /* color: grey; */
+        font-family: 'Indie Flower', cursive;
+      }
+
+      .close {
+        transform: translateX(87vw) translateY(-20vw) rotate(180deg);
       }
 
       .show_add {
@@ -201,13 +219,37 @@ border-radius: 5px;
       }
 
 .show_header {
-  height: 340px;
+  height: 365px;
+}
+
+.data-quantity {
+        grid-column-start: 1;
+        grid-column-end: 2;
+}
+
+.data-item {
+        grid-column-start: 2;
+        grid-column-end: 3;
+}
+.data-date {
+        grid-column-start: 3;
+        grid-column-end: 4;
+}
+
+.data-offer {
+        grid-column-start: 4;
+        grid-column-end: 5;
+}
+
+.checkbox {
+  grid-column-start: 5;
+        grid-column-end: 6;
 }
     </style>
   </head>
   <body>
     <header>
-      <h1>Indkøbsliste</h1><p class="show">X</p>
+      <h1>Indkøbsliste</h1><p class="show">V</p>
       <form>
         <!-- <h2>Tilføj ny vare</h2> -->
         <label class="butik">
@@ -416,6 +458,7 @@ border-radius: 5px;
         console.log("der er klikket");
         document.querySelector("form").classList.toggle("show_add");
         document.querySelector("header").classList.toggle("show_header");
+        document.querySelector(".show").classList.toggle("close");
       })
     </script>
   </body>
